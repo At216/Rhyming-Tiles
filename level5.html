@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="icon" type="image/x-icon" href="favicon.png">
+    <title>Rhyming Tiles - Level 5 </title>
+  
+    <style>
+    html, body {
+        height:100%;
+        margin:0; 
+    }
+    body { 
+        background-color: #fef6e4;
+        font-family: 'Comic Sans MS', cursive, sans-serif;
+        color: #001858;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+    }
+    header { 
+        background-color: lightgreen;
+        padding: 20px;
+    }
+    h1 { 
+        font-size: 2.5rem;
+    }
+    nav { 
+        margin: 20px;
+    }
+    nav button { 
+        background-color: #8bd3dd;
+        color: #001858;
+        border: none;
+        padding: 15px 30px;
+        font-size: 1.2rem;
+        margin: 10px;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+    section { 
+        padding: 20px;
+    }
+    .footer { 
+        background-color: #fcd5ce;
+        padding: 15px;
+        font-size: 1rem;
+    }
+    .flexContainer { 
+        display: flex;
+        justify-content: center;
+        flex-direction: column; 
+        align-items: center; 
+    }
+    .standardButton {
+        background-color: lightgreen;
+        color: #001858;
+        border: none;
+        padding: 10px 15px;
+        font-size: 1.2rem;
+        margin: 10px;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+
+    </style>
+
+</head>
+
+
+
+
+
+<body>
+<div style="min-height:100%;height:auto;">
+  <header>
+    <h1>Rhyming Tiles &mdash; Level 5</h1>
+  </header>
+  <nav>
+    <button onclick='window.open("https://rhyming-tiles.web.app/level1.html")'>Level 1</button>
+    <button onclick='window.open("https://rhyming-tiles.web.app/level2.html")'>Level 2</button>
+    <button onclick='window.open("https://rhyming-tiles.web.app/level3.html")'>Level 3</button>
+    <button onclick='window.open("https://rhyming-tiles.web.app/level4.html")'>Level 4</button>
+    <button onclick='window.open("https://rhyming-tiles.web.app/level5.html")'>Level 5</button>
+  </nav>
+  <!--<nav>
+    <button onclick="">Level 6</button>
+    <button onclick="">Level 7</button>
+    <button onclick="">Level 8</button>
+    <button onclick="">Level 9</button>
+    <button onclick="">Level 10</button>
+  </nav>-->
+
+
+
+
+
+  <section>
+    <h2>Drag rhyming words from the word bank to the correct box</h2>
+    <p>Click "Check answers" when finished to check your work! 🐒🌴</p>
+
+    <button class="standardButton" onclick="check()">Check answers</button> 
+        <span id="checkStatus">---</span>
+        <br><br>
+
+        <div class="flexContainer" style="font-size:2rem">
+            <br>Word bank <br> 
+            <div name="" id="div1" style="width:30%; min-height:50px; border: 1px solid black; height:auto" ondrop="dropHandler(event)" ondragover="dragoverHandler(event)">
+                <span style="color:rgb(49, 49, 255)" id="Rat" draggable="true" ondragstart="dragstartHandler(event)">Pat </span>
+                <span style="color:rgb(49, 49, 255)" id="Frog" draggable="true" ondragstart="dragstartHandler(event)">Hog </span>
+                <span style="color:rgb(49, 49, 255)" id="Bun" draggable="true" ondragstart="dragstartHandler(event)">Run </span>
+                <span style="color:rgb(49, 49, 255)" id="Lake" draggable="true" ondragstart="dragstartHandler(event)">Make </span>
+            </div><br>
+
+
+
+
+            <div id="Pat" style="width:auto; min-width:30%; height:50px; border: 1px solid black" ondrop="dropHandler(event)" ondragover="dragoverHandler(event)">
+                <span style="float:left;user-select: none;">Rat: </span>
+            </div>
+            <div id="Hog" style="width:auto; min-width:30%; height:50px; border: 1px solid black" ondrop="dropHandler(event)" ondragover="dragoverHandler(event)">
+                <span style="float:left;user-select: none;">Frog: </span>
+            </div>
+            <div id="Run" style="width:auto; min-width:30%; height:50px; border: 1px solid black" ondrop="dropHandler(event)" ondragover="dragoverHandler(event)">
+                <span style="float:left;user-select: none;">Bun: </span>
+            </div>
+            <div id="Make" style="width:auto; min-width:30%; height:50px; border: 1px solid black" ondrop="dropHandler(event)" ondragover="dragoverHandler(event)">
+                <span style="float:left;user-select: none;">Lake: </span>
+            </div>
+
+            
+
+        </div>
+    </div>
+  </section>
+
+
+
+
+
+
+
+
+</div>
+<div class="footer">
+    &copy; 2025 A. Martin. Stay curious and keep learning! <br>Rhyming functionality by yours truly &mdash; Layout inspired by Microsoft Copilot
+</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+    //document.getElementById("h1").parentElement.nodeName
+
+    var words = ["Pat", "Hog", "Run", "Make"] //Words in the word bank
+    var rhymes = ["Rat", "Frog", "Bun", "Lake"] //Words to match to 
+    var correct
+    function check() {
+        correct = true; 
+        for (let i = 0; i < words.length; i++) {
+            word = document.getElementById(rhymes[i]).parentElement.id
+            //console.log(word, rhymes[i])
+            if(word != words[i]) {
+                console.log("incorrect answer detected")
+                correct = false
+            }
+            
+        }
+        console.log("All answers are correct: ", correct)
+        if(correct == false) {
+            document.getElementById("checkStatus").innerHTML = "Some answers are incorrect - try again 🤔" 
+            document.getElementById("checkStatus").style.backgroundColor = "yellow" 
+        }
+        if(correct == true) {
+            document.getElementById("checkStatus").innerHTML = "All answers are correct - good work 🙂" 
+            document.getElementById("checkStatus").style.backgroundColor = "lightgreen" 
+        }
+        
+    }
+
+    function dragstartHandler(ev) { //ev is event? 
+      ev.dataTransfer.setData("text", ev.target.id);
+    }
+    
+    function dragoverHandler(ev) {
+      ev.preventDefault();
+    }
+    
+    function dropHandler(ev) {
+      ev.preventDefault();
+      const data = ev.dataTransfer.getData("text");
+      console.log("data is:", data)
+      console.log("ev.target.id ->", ev.target.id)
+
+      place = false
+      for (let i = 0; i < words.length; i++) { //Check to make sure the object is a word box, not a SPAN element! 
+            if(words[i] == ev.target.id) {
+                console.log("This match is okay :)")
+                place = true
+            }
+        }
+      
+      if(place == true) { //If the match is okay, place it there :) 
+        ev.target.appendChild(document.getElementById(data)); 
+      }
+    }
+    
+</script>
